@@ -1,50 +1,46 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React from "react";
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
+import "./App.css";
+
+import { SearchBar, JobList } from "./components/index";
+import { Typography } from "@material-ui/core";
+
+async function fetchJobs(updateCb, searchTerm) {
+  const LAMBDA_API = `/.netlify/functions/async-jobs?searchTerm=${searchTerm}`;
+  const res = await fetch(LAMBDA_API);
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    data = { jobs: [] };
   }
 
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
+  updateCb(data.jobs);
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
+function App() {
+  const [jobList, updateJobs] = React.useState([]);
+  const [searchTerm, updateSearch] = React.useState("");
+
+  // replacing componentDidMount() by passing empty array as second arg
+  React.useEffect(() => {
+    fetchJobs(updateJobs, "");
+  }, []);
+
+  return (
+    <>
+      <Typography variant="h4" component="h1" className="title">
+        Entry Level Software Jobs
+      </Typography>
+      <SearchBar
+        searchTerm={searchTerm}
+        updateSearch={updateSearch}
+        fetchJobs={fetchJobs}
+        updateJobs={updateJobs}
+      />
+      <JobList jobs={jobList} />
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,27 @@
+.job {
+  display: flex;
+  width: 80%;
+  margin: 1rem auto;
+  justify-content: space-between;
+  padding: 1rem;
+  transition: .1s ease all;
+}
+
+.job:hover {
+  color: rgb(135, 135, 135);
+  cursor: pointer;
+
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: .1s ease all;
+}
+
+.date {
+ transition: .1s ease all;
+}
+

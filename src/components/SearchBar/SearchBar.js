@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./SearchBar.module.scss";
 
-const SearchBar = ({ updateSearchTerm }) => {
+function SearchBar({ updateSearchTerm }) {
   const [search, update] = React.useState("");
 
   return (
@@ -24,6 +24,6 @@ const SearchBar = ({ updateSearchTerm }) => {
       </button>
     </form>
   );
-};
+}
 
 export default SearchBar;

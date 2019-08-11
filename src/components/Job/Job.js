@@ -2,8 +2,7 @@ import React from "react";
 import {  Paper, Typography } from "@material-ui/core";
 import style from "./Job.module.scss"
 
-
-const Job = ({ job, onClick }) => {
+function Job({ job, onClick }) {
   return (
 
     <Paper onClick={onClick} className={style.job} >
@@ -18,6 +17,6 @@ const Job = ({ job, onClick }) => {
       </div>
     </Paper>
   );
-};
+}
 
 export default Job;

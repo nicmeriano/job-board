@@ -10,7 +10,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
 import style from "./JobList.module.scss";
 
-const Jobs = ({ jobs }) => {
+function Jobs({ jobs }) {
   const [open, setOpen] = React.useState(false);
   const [selectedJob, selectJob] = React.useState({});
 
@@ -83,6 +83,6 @@ const Jobs = ({ jobs }) => {
       />
     </div>
   );
-};
+}
 
 export default Jobs;

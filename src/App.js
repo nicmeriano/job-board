@@ -2,7 +2,8 @@ import React from "react";
 
 import "./App.css";
 
-import { SearchBar, JobList } from "./components/index";
+import SearchBar from "./components/SearchBar";
+import JobList from "./components/JobList";
 import { Typography } from "@material-ui/core";
 
 async function fetchJobs(searchTerm) {

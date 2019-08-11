@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Job, JobModal } from "../index";
+import Job from "./Job";
+import JobModal from "./JobModal";
 import { Typography } from "@material-ui/core";
 
 import MobileStepper from "@material-ui/core/MobileStepper";

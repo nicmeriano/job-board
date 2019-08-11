@@ -1,10 +1,9 @@
 // example of async handler using async-await
 // https://github.com/netlify/netlify-lambda/issues/43#issuecomment-444618311
 
-import axios from "axios"
 import fetch from "node-fetch"
 
-export async function handler(event, context) {
+export async function handler(event) {
   try {
     const { searchTerm } = event.queryStringParameters || {};
     console.log("search", { searchTerm });
@@ -59,31 +58,6 @@ async function fetchGithub(searchTerm) {
 
   console.log(`got a total of ${jrJobs.length} jobs (FILTERED)`);
 
-  
-
   console.log('fetching complete')
   return jrJobs;
 }
-
-// // example of async handler using async-await
-// // https://github.com/netlify/netlify-lambda/issues/43#issuecomment-444618311
-
-// import axios from "axios"
-// export async function handler(event, context) {
-//   try {
-//     const {searchTerm} = event.queryStringParameters;
-//     console.log('SEARCH TERM', searchTerm);
-//     // const response = await axios.get(`https://jobs.github.com/positions.json?description=${searchTerm}`, { headers: { Accept: "application/json" } })
-//     // const data = response.data
-//     // return {
-//     //   statusCode: 200,
-//     //   body: JSON.stringify({ msg: data.joke })
-//     // }
-//   } catch (err) {
-//     console.log(err) // output to netlify function log
-//     return {
-//       statusCode: 500,
-//       body: JSON.stringify({ msg: err.message }) // Could be a custom message or object i.e. JSON.stringify(err)
-//     }
-//   }
-// }

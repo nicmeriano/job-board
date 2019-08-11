@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 
-import { SearchBar, JobList } from "./components/index";
+import SearchBar from "./components/SearchBar";
+import JobList from "./components/JobList";
 import { Typography } from "@material-ui/core";
 
-async function fetchJobs(updateCb, searchTerm) {
+async function fetchJobs(searchTerm) {
   const LAMBDA_API = `/.netlify/functions/async-jobs?searchTerm=${searchTerm}`;
   const res = await fetch(LAMBDA_API);
   let data;
@@ -14,30 +15,23 @@ async function fetchJobs(updateCb, searchTerm) {
   } catch (e) {
     data = { jobs: [] };
   }
-
-  updateCb(data.jobs);
+  return data.jobs;
 }
 
 function App() {
-  const [jobList, updateJobs] = React.useState([]);
-  const [searchTerm, updateSearch] = React.useState("");
+  const [jobList, updateJobs] = useState([]);
+  const [searchTerm, updateSearchTerm] = useState("");
 
-  // replacing componentDidMount() by passing empty array as second arg
-  React.useEffect(() => {
-    fetchJobs(updateJobs, "");
-  }, []);
+  useEffect(() => {
+    fetchJobs(searchTerm).then(updateJobs);
+  }, [searchTerm]);
 
   return (
     <>
       <Typography variant="h4" component="h1" className="title">
         Entry Level Software Jobs
       </Typography>
-      <SearchBar
-        searchTerm={searchTerm}
-        updateSearch={updateSearch}
-        fetchJobs={fetchJobs}
-        updateJobs={updateJobs}
-      />
+      <SearchBar updateSearchTerm={updateSearchTerm} />
       <JobList jobs={jobList} />
     </>
   );

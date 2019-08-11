@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-import style from "./searchbar.module.scss";
+import style from "./SearchBar.module.scss";
 
-const SearchBar = ({ searchTerm, updateSearch, fetchJobs, updateJobs }) => {
-  const [search, update] = React.useState("");
+function SearchBar({ updateSearchTerm }) {
+  const [search, update] = useState("");
 
   return (
     <form className={style.form}>
@@ -17,14 +17,13 @@ const SearchBar = ({ searchTerm, updateSearch, fetchJobs, updateJobs }) => {
       <button
         onClick={e => {
           e.preventDefault();
-          fetchJobs(updateJobs, search);
-          update("");
+          updateSearchTerm(search);
         }}
       >
         search
       </button>
     </form>
   );
-};
+}
 
 export default SearchBar;

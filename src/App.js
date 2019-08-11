@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 import "./App.css";
 
@@ -19,10 +19,10 @@ async function fetchJobs(searchTerm) {
 }
 
 function App() {
-  const [jobList, updateJobs] = React.useState([]);
-  const [searchTerm, updateSearchTerm] = React.useState("");
+  const [jobList, updateJobs] = useState([]);
+  const [searchTerm, updateSearchTerm] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchJobs(searchTerm).then(updateJobs);
   }, [searchTerm]);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Job from "./Job";
 import JobModal from "./JobModal";
@@ -12,8 +12,8 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import style from "./JobList.module.scss";
 
 function Jobs({ jobs }) {
-  const [open, setOpen] = React.useState(false);
-  const [selectedJob, selectJob] = React.useState({});
+  const [open, setOpen] = useState(false);
+  const [selectedJob, selectJob] = useState({});
 
   function handleClickOpen() {
     setOpen(true);
@@ -25,7 +25,7 @@ function Jobs({ jobs }) {
 
   // artificial pagination - loading all jobs then splitting them into pages
   // TODO: move pagination to the server side
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const numJobs = jobs.length;
   const numPages = Math.ceil(numJobs / 25);
   const jobsOnPage = jobs.slice(activeStep * 25, activeStep * 25 + 25);

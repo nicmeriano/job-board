@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 
 import style from "./SearchBar.module.scss";
 
 function SearchBar({ updateSearchTerm }) {
-  const [search, update] = React.useState("");
+  const [search, update] = useState("");
 
   return (
     <form className={style.form}>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from "./searchbar.module.scss";
+import style from "./SearchBar.module.scss";
 
 const SearchBar = ({ updateSearchTerm }) => {
   const [search, update] = React.useState("");

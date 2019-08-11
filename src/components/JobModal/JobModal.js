@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Typography } from "@material-ui/core";
 
-import style from "./jobmodal.module.scss"
+import style from "./JobModal.module.scss"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -56,8 +56,8 @@ export default function AlertDialogSlide({ job, open, handleClose }) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description"dangerouslySetInnerHTML={{__html: description}} />
-           
-       
+
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

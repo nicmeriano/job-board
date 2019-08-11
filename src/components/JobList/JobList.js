@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
-import style from "./joblist.module.scss";
+import style from "./JobList.module.scss";
 
 const Jobs = ({ jobs }) => {
   const [open, setOpen] = React.useState(false);

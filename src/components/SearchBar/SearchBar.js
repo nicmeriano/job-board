@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./searchbar.module.scss";
 
-const SearchBar = ({ searchTerm, updateSearch, fetchJobs, updateJobs }) => {
+const SearchBar = ({ updateSearchTerm }) => {
   const [search, update] = React.useState("");
 
   return (
@@ -17,8 +17,7 @@ const SearchBar = ({ searchTerm, updateSearch, fetchJobs, updateJobs }) => {
       <button
         onClick={e => {
           e.preventDefault();
-          fetchJobs(updateJobs, search);
-          update("");
+          updateSearchTerm(search);
         }}
       >
         search

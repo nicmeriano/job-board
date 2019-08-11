@@ -9,7 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { Typography } from "@material-ui/core";
 
-import style from "./JobModal.module.scss"
+import style from "./JobModal.module.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,11 +26,11 @@ export default function AlertDialogSlide({ job, open, handleClose }) {
     url
   } = job;
 
-  const logo = company_logo ? <img
-  src={company_logo}
-  alt="company logo"
-  className={style.logo}
-/> : <div></div>
+  const logo = company_logo ? (
+    <img src={company_logo} alt="company logo" className={style.logo} />
+  ) : (
+    <div />
+  );
 
   return (
     <div>
@@ -45,30 +45,26 @@ export default function AlertDialogSlide({ job, open, handleClose }) {
         <DialogTitle id="alert-dialog-slide-title">
           <div className={style.header}>
             <div>
-            <Typography variant="h5">{title}</Typography>
-            <Typography variant="h6">{company}</Typography>
-            <Typography variant="subtitle1">{location}</Typography>
-            <Typography variant="caption">{created_at}</Typography>
-
+              <Typography variant="h5">{title}</Typography>
+              <Typography variant="h6">{company}</Typography>
+              <Typography variant="subtitle1">{location}</Typography>
+              <Typography variant="caption">{created_at}</Typography>
             </div>
             {logo}
           </div>
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description"dangerouslySetInnerHTML={{__html: description}} />
-
-
+          <DialogContentText
+            id="alert-dialog-slide-description"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
-          <a href={url} target="_blank" rel="noopener noreferrer" >
-
-            <Button  color="primary">
-              Apply
-            </Button>
-
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <Button color="primary">Apply</Button>
           </a>
         </DialogActions>
       </Dialog>

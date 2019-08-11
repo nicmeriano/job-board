@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import Job from "./Job";
 import JobModal from "./JobModal";

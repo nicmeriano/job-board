@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-
-import "./App.css";
-
+import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import JobList from "./components/JobList";
-import { Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
+import "./App.css";
 
 async function fetchJobs(searchTerm) {
   const LAMBDA_API = `/.netlify/functions/async-jobs?searchTerm=${searchTerm}`;
@@ -27,13 +26,11 @@ function App() {
   }, [searchTerm]);
 
   return (
-    <>
-      <Typography variant="h4" component="h1" className="title">
-        Entry Level Software Jobs
-      </Typography>
+    <Container maxWidth="lg">
+      <Header />
       <SearchBar updateSearchTerm={updateSearchTerm} />
       <JobList jobs={jobList} />
-    </>
+    </Container>
   );
 }
 

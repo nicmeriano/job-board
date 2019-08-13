@@ -24,13 +24,23 @@ export async function handler(event) {
 }
 
 async function fetchGithub(searchTerm, location) {
-  location = location
+  const query = searchTerm
     .trim()
     .toLowerCase()
     .split(" ")
     .filter(word => word.length > 1)
     .join("+");
-  const baseURL = `https://jobs.github.com/positions.json?description=${searchTerm}&location=${location}`;
+
+  const loc = location
+    .trim()
+    .toLowerCase()
+    .split(" ")
+    .filter(word => word.length > 1)
+    .join("+");
+
+  const baseURL = `https://jobs.github.com/positions.json?description=${query}&location=${loc}`;
+  console.log({ query, loc, baseURL });
+
   let resultCount = 1;
   let currentPage = 0;
 

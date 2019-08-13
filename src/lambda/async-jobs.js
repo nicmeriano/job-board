@@ -5,9 +5,9 @@ import fetch from "node-fetch";
 
 export async function handler(event) {
   try {
-    const { searchTerm } = event.queryStringParameters || {};
-    console.log("search", { searchTerm });
-    const allJobs = await fetchGithub(searchTerm);
+    const { searchTerm, location } = event.queryStringParameters || {};
+    console.log("searching: ", { searchTerm, location });
+    const allJobs = await fetchGithub(searchTerm, location);
 
     return {
       statusCode: 200,
@@ -23,8 +23,14 @@ export async function handler(event) {
   }
 }
 
-async function fetchGithub(searchTerm) {
-  const baseURL = `https://jobs.github.com/positions.json?description=${searchTerm}`;
+async function fetchGithub(searchTerm, location) {
+  location = location
+    .trim()
+    .toLowerCase()
+    .split(" ")
+    .filter(word => word.length > 1)
+    .join("+");
+  const baseURL = `https://jobs.github.com/positions.json?description=${searchTerm}&location=${location}`;
   let resultCount = 1;
   let currentPage = 0;
 

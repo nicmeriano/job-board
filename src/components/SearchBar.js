@@ -62,8 +62,9 @@ const useStyles = makeStyles({
   }
 });
 
-function SearchBar({ updateSearchTerm }) {
-  const [search, update] = useState("");
+function SearchBar({ updateSearchTerm, updateLocation }) {
+  const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
   const classes = useStyles();
 
   return (
@@ -79,9 +80,9 @@ function SearchBar({ updateSearchTerm }) {
                   </IconButton>
                   <InputBase
                     className={style.input}
-                    placeholder="Search"
+                    placeholder="Job title, keywords, or company"
                     onChange={e => {
-                      update(e.target.value);
+                      setSearch(e.target.value);
                     }}
                   />
                 </Paper>
@@ -92,6 +93,9 @@ function SearchBar({ updateSearchTerm }) {
                   className={classes.textField}
                   variant="outlined"
                   label="Location"
+                  onChange={e => {
+                    setLocation(e.target.value);
+                  }}
                   InputLabelProps={{
                     classes: {
                       root: classes.cssLabel,
@@ -115,6 +119,7 @@ function SearchBar({ updateSearchTerm }) {
                   onClick={e => {
                     e.preventDefault();
                     updateSearchTerm(search);
+                    updateLocation(location);
                   }}
                 >
                   search

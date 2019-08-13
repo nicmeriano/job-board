@@ -6,9 +6,9 @@ import Loader from "./components/Loader";
 import { Container } from "@material-ui/core";
 import "./App.css";
 
-async function fetchJobs(searchTerm, loading) {
+async function fetchJobs(searchTerm, location, loading) {
   loading(true);
-  const LAMBDA_API = `/.netlify/functions/async-jobs?searchTerm=${searchTerm}`;
+  const LAMBDA_API = `/.netlify/functions/async-jobs?searchTerm=${searchTerm}&location=${location}`;
   const res = await fetch(LAMBDA_API);
   let data;
   try {
@@ -23,16 +23,20 @@ async function fetchJobs(searchTerm, loading) {
 function App() {
   const [jobList, updateJobs] = useState([]);
   const [searchTerm, updateSearchTerm] = useState("");
+  const [location, updateLocation] = useState("");
   const [isLoading, updateLoading] = useState(true);
 
   useEffect(() => {
-    fetchJobs(searchTerm, updateLoading).then(updateJobs);
-  }, [searchTerm]);
+    fetchJobs(searchTerm, location, updateLoading).then(updateJobs);
+  }, [searchTerm, location]);
 
   return (
     <Container maxWidth="lg">
       <Header />
-      <SearchBar updateSearchTerm={updateSearchTerm} />
+      <SearchBar
+        updateSearchTerm={updateSearchTerm}
+        updateLocation={updateLocation}
+      />
       {isLoading ? <Loader /> : <JobList jobs={jobList} />}
     </Container>
   );

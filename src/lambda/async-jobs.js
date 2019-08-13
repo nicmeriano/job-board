@@ -92,8 +92,24 @@ async function fetchGithub(searchTerm, location) {
     }
   });
 
-  console.log(`got a total of ${jrJobs.length} jobs (FILTERED)`);
+  // remove duplicates
+
+  function removeDuplicatesBy(keyFn, array) {
+    let mySet = new Set();
+    return array.filter(el => {
+      let key = keyFn(el);
+      let isNew = !mySet.has(key);
+      if (isNew) {
+        mySet.add(key);
+      }
+      return isNew;
+    });
+  }
+
+  const sortedUniqueJobs = removeDuplicatesBy(job => job.id, sortedJobs);
+
+  console.log(`got a total of ${sortedUniqueJobs.length} jobs (FILTERED)`);
 
   console.log("fetching complete");
-  return sortedJobs;
+  return sortedUniqueJobs;
 }

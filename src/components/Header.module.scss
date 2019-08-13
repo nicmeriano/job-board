@@ -1,5 +1,12 @@
 .header {
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
+
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 8rem;
+  }
+  @media only screen and (min-width: 1440px) {
+    margin-bottom: 10rem;
+  }
 }
 .wrapper {
   margin-bottom: 2rem;

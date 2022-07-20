@@ -1,5 +1,7 @@
 ## Job Board
 
+**Note**: The GitHub job API is now deprecated so this site is no longer functional.
+
 Find entry level software positions posted on [Github Jobs](https://jobs.github.com/).
 
 This project uses [Create React App v3](https://github.com/facebookincubator/create-react-app) and [netlify-lambda v1](https://github.com/netlify/netlify-lambda) together in a [Netlify Dev](https://github.com/netlify/netlify-dev-plugin) workflow.
